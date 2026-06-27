@@ -153,7 +153,6 @@ The app will launch in your default browser at `http://localhost:8501`.
 ### Bad Risk Prediction
 
 ![Bad Risk Prediction](screenshots/Bad%20risk%20prediction.png)
-![Bad Risk Input](screenshots/bad_risk_input.png)
 
 ---
 
