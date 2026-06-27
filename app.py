@@ -8,48 +8,96 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import shap
 
 st.set_page_config(page_title="AI Credit Risk Analyst", page_icon="💳")
+st.title("AI-Powered Credit Risk Analyzer")
 
-st.title("💳 AI Credit Risk Analyst")
-st.write("Enter customer details to assess credit risk.")
+st.markdown("""
+Predict whether a loan applicant is likely to be a **Good Risk** or **Bad Risk**
+using a Random Forest Machine Learning model trained on the German Credit Dataset.
+""")
+
 st.subheader("Customer Information")
 
-age = st.number_input("Age",min_value=19, max_value=75, value=33) #value tells default value that would show on opening app
+col1, col2 = st.columns(2)
 
-job = st.selectbox(
-    "Job Category",
-    options=[
-        "0 - Unskilled (Non-resident)",
-        "1 - Unskilled (Resident)",
-        "2 - Skilled",
-        "3 - Highly Skilled"
+with col1:
+
+    age = st.number_input(
+        "Age",
+        min_value=19,
+        max_value=75,
+        value=33
+    )
+
+    sex = st.selectbox(
+        "Sex",
+        ["male", "female"]
+    )
+
+    housing = st.selectbox(
+        "Housing",
+        ["own", "rent", "free"]
+    )
+
+    saving_account = st.selectbox(
+        "Saving Account",
+        ["little", "moderate", "quite rich", "rich", "unknown"]
+    )
+
+with col2:
+
+    job_option = st.selectbox(
+        "Job Category",
+        [
+            "0 - Unskilled (Non-resident)",
+            "1 - Unskilled (Resident)",
+            "2 - Skilled",
+            "3 - Highly Skilled"
+        ],
+        index=2
+    )
+
+    job = int(job_option[0])
+
+    checking_account = st.selectbox(
+        "Checking Account",
+        ["little", "moderate", "rich", "unknown"]
+    )
+
+    credit_amount = st.number_input(
+        "Credit Amount",
+        min_value=250,
+        max_value=18424,
+        value=2320
+    )
+
+    duration = st.number_input(
+        "Duration (Months)",
+        min_value=4,
+        max_value=72,
+        value=18
+    )
+
+purpose = st.selectbox(
+    "Purpose",
+    [
+        "radio/TV",
+        "education",
+        "furniture/equipment",
+        "car",
+        "repairs",
+        "domestic appliances",
+        "vacation/others"
     ]
 )
 
-job = int(job[0])   # Extracts 0,1,2,3 for the model
+predict = st.button("🔍 Predict Credit Risk", use_container_width=True)
 
-sex = st.selectbox("Sex",["male", "female"])
-
-housing = st.selectbox("Housing",["own", "rent", "free"])
-
-saving_account = st.selectbox("Saving Account",["little", "moderate", "quite rich", "rich", "unknown"])
-
-checking_account = st.selectbox("Checking Account", ["little", "moderate", "rich", "unknown"])
-
-credit_amount = st.number_input("Credit Amount", min_value=250, max_value=18424, value=2320)
-
-duration = st.number_input("Duration (Months)",min_value=4, max_value=72,value=18)
-
-purpose = st.selectbox("Purpose",["radio/TV","education", "furniture/equipment","car","repairs","domestic appliances","vacation/others"
-    ])
-
-
-if st.button("Predict Risk"):
-
-  
-
+if predict:
     model = joblib.load("models/random_forest.pkl")
+    explainer = shap.TreeExplainer(model)
 
     input_data = {
         'Age': age,
@@ -84,11 +132,65 @@ if st.button("Predict Risk"):
 
     prediction = model.predict(input_df)[0]
     probability = model.predict_proba(input_df)[0]
+    good_prob = probability[1] * 100
+    bad_prob = probability[0] * 100
+    
+    # SHAP explanation
+    shap_values = explainer(input_df)
+    customer_shap = shap_values.values[0, :, prediction]
+    explanation = pd.DataFrame({
+    "Feature": input_df.columns,
+    "SHAP Value": customer_shap})
+    explanation["Absolute"] = explanation["SHAP Value"].abs()
+    explanation = explanation.sort_values(by="Absolute", ascending=False)
+    
+    st.markdown("---")
+    st.subheader("📊 Prediction Summary")
+    def interpret(row):
+        if prediction == 1:
+            if row["SHAP Value"]>0:
+                return "🟢 Increased likelihood of Good Risk"
+            else:
+                return "🔴 Increased likelihood of Bad Risk"
+        
+        else:
+            if row["SHAP Value"] > 0:
+                return "🔴 Increased likelihood of Bad Risk"
+            else:
+                return "🟢 Increased likelihood of Good Risk"
+    explanation["Contribution"] = explanation.apply(interpret, axis=1)
+    explanation["Contribution"] = explanation.apply(interpret, axis=1)
+    st.markdown("---")
+    st.subheader("🔍 Top Factors Influencing This Prediction")
+    st.dataframe(explanation[["Feature", "Contribution"]].head(5), use_container_width=True, hide_index=True)
 
-    if prediction == 1:
-        st.success("✅ Good Risk Customer")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Good Risk Probability", f"{good_prob:.2f}%")
+        st.progress(good_prob / 100)
+    
+    with col2:
+        st.metric("Bad Risk Probability", f"{bad_prob:.2f}%")
+        st.progress(bad_prob / 100)
+    
+    st.markdown("### Risk Level")
+    if good_prob >= 95:
+        st.success("🟢 Very Low Risk")
+    elif good_prob >= 80:
+        st.success("🟢 Low Risk")
+    elif good_prob >= 60:
+        st.warning("🟡 Moderate Risk")
     else:
-        st.error("⚠️ Bad Risk Customer")
-
-    st.write(f"Good Risk Probability: {probability[1]*100:.2f}%")
-    st.write(f"Bad Risk Probability: {probability[0]*100:.2f}%")
+        st.error("🔴 High Risk")
+        
+    st.markdown("### 💡 Recommendation")
+    if prediction == 1:
+        st.success(
+            "The applicant appears to have a low probability of default. "
+        )
+    else:
+        st.error(
+            "The applicant exhibits characteristics associated with higher credit risk. "
+            "Additional financial verification or collateral may be required before approval."
+        )
+  

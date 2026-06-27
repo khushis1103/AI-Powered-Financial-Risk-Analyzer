@@ -11,7 +11,7 @@ The project covers the full ML lifecycle — data preprocessing, feature enginee
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 - [Features](#-features)
 - [Dataset](#-dataset)
 - [Tech Stack](#-tech-stack)
@@ -29,20 +29,20 @@ The project covers the full ML lifecycle — data preprocessing, feature enginee
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🎯 Credit Risk Prediction using Machine Learning
-- 🖥️ Interactive Streamlit Web App
-- 🧹 Data Cleaning & Preprocessing
-- 🏗️ Feature Engineering with One-Hot Encoding
-- 🌲 Random Forest Classification
-- 📊 Probability Prediction
-- 🔍 Explainable AI using SHAP
-- 💾 Model Serialization using Joblib
+- Credit Risk Prediction using Machine Learning
+- Interactive Streamlit Web App
+- Data Cleaning & Preprocessing
+- Feature Engineering with One-Hot Encoding
+- Random Forest Classification
+- Probability Prediction
+- Explainable AI using SHAP
+- Model Serialization using Joblib
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 **Dataset Used:** German Credit Risk Dataset
 
@@ -54,7 +54,7 @@ The project covers the full ML lifecycle — data preprocessing, feature enginee
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Category | Tools |
 |---|---|
@@ -68,7 +68,7 @@ The project covers the full ML lifecycle — data preprocessing, feature enginee
 
 ---
 
-## 📈 Machine Learning Pipeline
+## Machine Learning Pipeline
 
 1. Data Cleaning
 2. Missing Value Handling
@@ -110,7 +110,7 @@ SHAP was used to explain both global feature importance and individual customer 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 AI-Powered-Financial-Risk-Analyzer
@@ -126,27 +126,6 @@ AI-Powered-Financial-Risk-Analyzer
 
 ---
 
-## ⚙️ Installation & Setup
-
-**1. Clone the repository**
-```bash
-git clone https://github.com/<your-username>/AI-Powered-Financial-Risk-Analyzer.git
-cd AI-Powered-Financial-Risk-Analyzer
-```
-
-**2. Create a virtual environment (recommended)**
-```bash
-python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-```
-
-**3. Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
----
-
 ## ▶️ Run Locally
 
 ```bash
@@ -157,49 +136,42 @@ The app will launch in your default browser at `http://localhost:8501`.
 
 ---
 
-## 📸 Application Screenshots
+## Application Screenshots
 
 ### Home Page
-*(Add screenshot here)*
 
-### Prediction Result
-*(Add screenshot here)*
+![Home Page](screenshots/Home%20Page.png)
+
+### Good Risk Input
+
+![Good Risk Input](screenshots/Good%20risk%20input.png)
+
+### Good Risk Prediction
+
+![Good Risk Prediction](screenshots/Good%20risk%20prediction.png)
+
+### Bad Risk Input
+
+![Bad Risk Input](screenshots/Bad%20risk%20input.png)
 
 ### Bad Risk Prediction
-*(Add screenshot here)*
+
+![Bad Risk Prediction](screenshots/Bad%20risk%20prediction.png)
+![Bad Risk Input](screenshots/bad_risk_input.png)
+
+### Bad Risk Prediction
+![Bad Risk Prediction](screenshots/bad_risk_prediction.png)
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - [ ] Hyperparameter tuning
 - [ ] Model comparison (XGBoost, LightGBM)
-- [ ] Customer Risk Dashboard
-- [ ] PDF Report Generation
-- [ ] Cloud Deployment
 - [ ] Real-time API Integration
 
 ---
 
-## 🤝 Contributing
-
-Contributions, issues, and feature requests are welcome!
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License** — feel free to use and modify it for your own work.
-
----
-
-## 👨‍💻 Author
+## Author
 
 **Khushi**
-
-If you found this project useful, consider giving it a ⭐ on GitHub!
