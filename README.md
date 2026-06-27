@@ -6,8 +6,7 @@ The project covers the full ML lifecycle — data preprocessing, feature enginee
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
 
 ---
 
@@ -19,12 +18,9 @@ The project covers the full ML lifecycle — data preprocessing, feature enginee
 - [Model Performance](#-model-performance)
 - [Feature Importance](#-feature-importance)
 - [Project Structure](#-project-structure)
-- [Installation & Setup](#️-installation--setup)
 - [Run Locally](#️-run-locally)
 - [Application Screenshots](#-application-screenshots)
 - [Future Improvements](#-future-improvements)
-- [Contributing](#-contributing)
-- [License](#-license)
 - [Author](#-author)
 
 ---
