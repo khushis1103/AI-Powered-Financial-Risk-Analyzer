@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Credit Risk Analyzer</title>
+  <style>
+  body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: #f4f6f8;
+    color: #222;
+  }
+
+  h1 {
+    text-align: center;
+    color: #1a3c5e;
+  }
+
+  form {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #1a3c5e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #14304a;
+  }
+
+  #result {
+    background: white;
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+</style>
+</head>
+
+<body>
+
+  <h1>AI Credit Risk Analyzer</h1>
+
+  <form id="creditForm">
+    <label>Age:</label>
+    <input type="number" id="age" value="18"><br><br>
+
+    <label>Sex:</label>
+    <select id="sex">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select><br><br>
+
+    <label>Housing:</label>
+    <select id="housing">
+      <option value="own">Own</option>
+      <option value="rent">Rent</option>
+      <option value="free">Free</option>
+    </select><br><br>
+
+    <label>Saving Account:</label>
+    <select id="saving_account">
+      <option value="little">Little</option>
+      <option value="moderate">Moderate</option>
+      <option value="quite rich">Quite Rich</option>
+      <option value="rich">Rich</option>
+      <option value="unknown">Unknown</option>
+    </select><br><br>
+
+    <label>Job Category:</label>
+    <select id="job">
+      <option value="0">Unskilled (Non-resident)</option>
+      <option value="1">Unskilled (Resident)</option>
+      <option value="2" selected>Skilled</option>
+      <option value="3">Highly Skilled</option>
+    </select><br><br>
+
+    <label>Checking Account:</label>
+    <select id="checking_account">
+      <option value="little">Little</option>
+      <option value="moderate">Moderate</option>
+      <option value="rich">Rich</option>
+      <option value="unknown">Unknown</option>
+    </select><br><br>
+
+    <label>Credit Amount:</label>
+    <input type="number" id="credit_amount" value="2320"><br><br>
+
+    <label>Duration (Months):</label>
+    <input type="number" id="duration" value="18"><br><br>
+
+    <label>Purpose:</label>
+    <select id="purpose">
+      <option value="radio/TV">Radio/TV</option>
+      <option value="education">Education</option>
+      <option value="furniture/equipment">Furniture/Equipment</option>
+      <option value="car">Car</option>
+      <option value="repairs">Repairs</option>
+      <option value="domestic appliances">Domestic Appliances</option>
+      <option value="vacation/others">Vacation/Others</option>
+    </select><br><br>
+
+    <button type="button">Predict</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.querySelector("button").addEventListener("click", async function() {
+      const formData = {
+        age: parseInt(document.getElementById("age").value),
+        sex: document.getElementById("sex").value,
+        housing: document.getElementById("housing").value,
+        saving_account: document.getElementById("saving_account").value,
+        job: parseInt(document.getElementById("job").value),
+        checking_account: document.getElementById("checking_account").value,
+        credit_amount: parseFloat(document.getElementById("credit_amount").value),
+        duration: parseInt(document.getElementById("duration").value),
+        purpose: document.getElementById("purpose").value
+      };
+
+      const response = await fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+      console.log(result);
+
+      let featuresHtml = "<h4>Top Contributing Factors:</h4><ul>";
+result.top_features.forEach(function(f) {
+  const direction = f.shap_value > 0 ? "increases" : "decreases";
+  featuresHtml += "<li>" + f.feature + " (" + direction + " good-risk likelihood)</li>";
+});
+featuresHtml += "</ul>";
+
+document.getElementById("result").innerHTML =
+  "<h3>Prediction: " + (result.prediction === 1 ? "Good Risk" : "Bad Risk") + "</h3>" +
+  "<p>Good Risk Probability: " + result.good_risk_probability + "%</p>" +
+  "<p>Bad Risk Probability: " + result.bad_risk_probability + "%</p>" +
+  featuresHtml;
+    });
+  </script>
+
+</body>
+</html>
