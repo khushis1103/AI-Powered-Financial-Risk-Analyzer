@@ -87,6 +87,7 @@ docker run -p 8000:8000 credit-risk-api
 ├── index.html            # Frontend
 
 ├── models/
+     
       └── random_forest.pkl # Trained model
 
 ├── requirements.txt
