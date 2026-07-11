@@ -62,7 +62,7 @@ cd AI-Powered-Financial-Risk-Analyzer
 
 ## Screenshots
 
-![App Screenshot](screenshots/prediction-demo.png)
+![App Screenshot](screenshots/Prediction-demo.png)
 
 # Install dependencies
 pip install -r requirements.txt
