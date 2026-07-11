@@ -3,7 +3,9 @@
 Predicts loan applicant risk (Good/Bad) using a Random Forest model trained on the German Credit Dataset, with SHAP-based explainability. Built as a full stack application — FastAPI backend, HTML/CSS/JS frontend, containerized with Docker.
 
 ##  Live Demo
-https://ai-powered-financial-risk-analyzer-k7s2.onrender.com/
+- **App:** https://khushis1103.github.io/AI-Powered-Financial-Risk-Analyzer/
+s1103.github.io/AI-Powered-Financial-Risk-Analyzer/
+- **API docs:** https://ai-powered-financial-risk-analyzer-k7s2.onrender.com/
 
 
 ##  Tech Stack
