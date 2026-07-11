@@ -4,7 +4,6 @@ Predicts loan applicant risk (Good/Bad) using a Random Forest model trained on t
 
 ##  Live Demo
 - **App:** https://khushis1103.github.io/AI-Powered-Financial-Risk-Analyzer/
-s1103.github.io/AI-Powered-Financial-Risk-Analyzer/
 - **API docs:** https://ai-powered-financial-risk-analyzer-k7s2.onrender.com/
 
 
