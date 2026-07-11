@@ -17,6 +17,10 @@ Predicts loan applicant risk (Good/Bad) using a Random Forest model trained on t
 | Frontend | HTML, CSS, JavaScript |
 | Deployment | Docker, Render |
 
+## How it works
+
+The frontend collects applicant details through a form and sends them to a `/predict` endpoint. The backend encodes the input, runs it through the trained model, and returns a prediction along with probability scores and the top three features driving that decision (via SHAP)
+
 ##  Features
 
 - Predicts credit risk (Good/Bad) with probability scores
@@ -29,17 +33,6 @@ Predicts loan applicant risk (Good/Bad) using a Random Forest model trained on t
 
 German Credit Dataset — 1000 records, applicant demographic and financial features (age, credit amount, duration, housing, savings, checking account status, purpose).
 
-##  Architecture
-
-User (Browser)
-↓ fetch()
-HTML/CSS/JS Frontend
-↓ POST /predict
-FastAPI Backend
-↓
-Random Forest Model + SHAP Explainer
-↓
-JSON Response (prediction + probabilities + top features)
 
 ##  Running Locally
 
@@ -47,6 +40,10 @@ JSON Response (prediction + probabilities + top features)
 # Clone the repo
 git clone https://github.com/khushis1103/AI-Powered-Financial-Risk-Analyzer.git
 cd AI-Powered-Financial-Risk-Analyzer
+
+## Screenshots
+
+![App Screenshot](screenshots/Prediction Demo.png)
 
 # Install dependencies
 pip install -r requirements.txt
@@ -64,14 +61,22 @@ docker build -t credit-risk-api .
 docker run -p 8000:8000 credit-risk-api
 ```
 
-##  Project Structure
-main.py              # FastAPI backend
-index.html            # Frontend
-models/
-  ── random_forest.pkl   # Trained model
-requirements.txt
- Dockerfile
- README.md
+
+## Project structure
+├── main.py              # FastAPI backend
+├── index.html            # Frontend
+├── models/
+│   └── random_forest.pkl # Trained model
+├── requirements.txt
+├── Dockerfile
+└── README.md
+
+
+## What's next
+
+- Persisting prediction history
+- Downloadable PDF reports
+- A small model comparison view (Random Forest vs. other classifiers)
 
 ---
 Built by Khushi Sahu
