@@ -62,7 +62,7 @@ cd AI-Powered-Financial-Risk-Analyzer
 
 ## Screenshots
 
-![App Screenshot](screenshots/Prediction Demo.png)
+![App Screenshot](screenshots/ Prediction Demo.png)
 
 # Install dependencies
 pip install -r requirements.txt
@@ -83,11 +83,16 @@ docker run -p 8000:8000 credit-risk-api
 
 ## Project structure
 ├── main.py              # FastAPI backend
+
 ├── index.html            # Frontend
+
 ├── models/
-│   └── random_forest.pkl # Trained model
+      └── random_forest.pkl # Trained model
+
 ├── requirements.txt
+
 ├── Dockerfile
+
 └── README.md
 
 
