@@ -33,6 +33,25 @@ The frontend collects applicant details through a form and sends them to a `/pre
 
 German Credit Dataset — 1000 records, applicant demographic and financial features (age, credit amount, duration, housing, savings, checking account status, purpose).
 
+##  Architecture
+
+User (Browser)
+
+↓ fetch()
+
+HTML/CSS/JS Frontend
+
+↓ POST /predict
+
+FastAPI Backend
+
+↓
+
+Random Forest Model + SHAP Explainer
+
+↓
+
+JSON Response (prediction + probabilities + top features)
 
 ##  Running Locally
 
