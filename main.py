@@ -14,6 +14,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@app.get("/")
+def root():
+    return {"message": "Credit Risk Analyzer API is running. Visit /docs for API documentation."}
 
 model = joblib.load("models/random_forest.pkl")
 explainer = shap.TreeExplainer(model)
