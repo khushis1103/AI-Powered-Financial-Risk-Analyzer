@@ -60,10 +60,6 @@ JSON Response (prediction + probabilities + top features)
 git clone https://github.com/khushis1103/AI-Powered-Financial-Risk-Analyzer.git
 cd AI-Powered-Financial-Risk-Analyzer
 
-## Screenshots
-
-![App Screenshot](screenshots/Prediction-demo.png)
-
 # Install dependencies
 pip install -r requirements.txt
 
