@@ -32,13 +32,21 @@ German Credit Dataset — 1000 records, applicant demographic and financial feat
 ##  Architecture
 
 User (Browser)
+
 ↓ fetch()
+
 HTML/CSS/JS Frontend
+
 ↓ POST /predict
+
 FastAPI Backend
+
 ↓
+
 Random Forest Model + SHAP Explainer
+
 ↓
+
 JSON Response (prediction + probabilities + top features)
 
 ##  Running Locally
