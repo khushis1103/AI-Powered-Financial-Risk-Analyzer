@@ -243,20 +243,7 @@ The application will open in the browser at `http://localhost:8501`.
 
 ---
 
-## Future Improvements
-
-- Stratified cross-validation for more robust model evaluation
-- Hyperparameter tuning for Random Forest
-- ROC-AUC and Precision-Recall AUC analysis
-- Cost-sensitive evaluation of credit-risk errors
-- Comparison with boosting-based models such as XGBoost
-- Improved preprocessing using a scikit-learn Pipeline
-- Monitoring model performance on new data
-
----
 
 ## Author
 
 **Khushi Sahu**
-M.Sc. Computer Science
-University of Delhi
