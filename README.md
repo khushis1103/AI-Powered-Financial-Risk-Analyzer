@@ -234,12 +234,7 @@ The application will open in the browser at `http://localhost:8501`.
 
 ---
 
-## Limitations
 
-- The dataset contains only 1,000 observations
-- Model evaluation is based on a single train-test split
-- Extensive hyperparameter tuning and cross-validation were not performed
-- The dataset is a standard educational credit-risk dataset and should not be treated as a production lending system
 
 ---
 
